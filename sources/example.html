@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Google Maps</title>
+    <style type="text/css">
+        #map-canvas {
+            width: 700px;
+            height: 500px;
+            margin: 0 auto;
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript">
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(29.935711, 52.887702);
+            var mapOptions = {
+                zoom: 15,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            var contentString = '<div style="direction: rtl; text-align: right;font-family: Tahoma;">' +
+                '<h4>Marvdasht , Takhte Jamshid</h4>' +
+                '<h5>Takhte Jamshid</h5>' +
+                '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Takhte Jamshid'
+            });
+
+            infowindow.open(map, marker);
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+</head>
+
+<body onload="initialize()">
+    <div id="map-canvas"></div>
+</body>
+
+</html>
